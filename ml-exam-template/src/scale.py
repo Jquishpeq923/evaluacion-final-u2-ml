@@ -32,7 +32,7 @@ def min_max_scale(values):
     col_min = arr.min()
     col_max = arr.max()
     # BUG (do not delete this comment until you fix the line below):
-    return (arr - col_max) / (col_max - col_min)
+    return (arr - col_min) / (col_max - col_min)
 
 
 def standardize(values):
