@@ -1,0 +1,28 @@
+{
+  "name": "ML Exam — Linear & Logistic Regression",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-python.vscode-pylance"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/app/.venv/bin/python",
+        "jupyter.notebookFileRoot": "${workspaceFolder}",
+        "jupyter.kernels.filter": [],
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/.ipynb_checkpoints": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [],
+  "postCreateCommand": "echo '✅ Entorno listo. Abre notebooks/exam.ipynb para comenzar.'",
+  "remoteUser": "root"
+}
