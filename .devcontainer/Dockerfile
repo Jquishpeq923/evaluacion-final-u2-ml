@@ -1,24 +1,28 @@
 FROM python:3.12-slim
 
-# Dependencias del sistema
+# System dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     git \
+    git-lfs \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Instalar UV
+RUN git lfs install
+
+# Install UV (fast Python package manager)
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 ENV PATH="/root/.local/bin:${PATH}"
 
 WORKDIR /app
 
-# Crear el entorno virtual
+# Create the virtual environment
 RUN uv venv .venv
 ENV VIRTUAL_ENV=/app/.venv
 ENV PATH="/app/.venv/bin:${PATH}"
 
-# Instalar dependencias
+# Install dependencies — note the --python flag, mandatory in Docker
+# because there is no `source .venv/bin/activate` step that persists across layers
 COPY pyproject.toml uv.lock* /app/
 RUN uv pip install --python /app/.venv/bin/python \
     pandas \
@@ -29,10 +33,7 @@ RUN uv pip install --python /app/.venv/bin/python \
     ipykernel \
     jupyter
 
-# Registrar el kernel de Jupyter en el venv
-RUN /app/.venv/bin/python -m ipykernel install --name=ml-exam --display-name "Python (ml-exam)"
-
-# Copiar archivos del proyecto
+# Copy project files
 COPY . /app/
 
 CMD ["bash"]
