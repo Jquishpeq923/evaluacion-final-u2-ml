@@ -23,6 +23,6 @@
     }
   },
   "forwardPorts": [],
-  "postCreateCommand": "/app/.venv/bin/python -m ipykernel install --user --name=ml-exam --display-name 'Python (ml-exam)' && echo '✅ Entorno listo. Abre notebooks/exam.ipynb para comenzar.'",
+  "postCreateCommand": "echo '✅ Entorno listo. Abre notebooks/exam.ipynb para comenzar.'",
   "remoteUser": "root"
 }
